@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Inicio</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Inicio</a>
+            </li>
+        </ul><br>
+        <div class="container text-center">
+            <h2>Devengados para el empleado: <span th:text="${empleado.nombre} + ' ' + ${empleado.apellido}"></span></h2><br>
+            <p>*Ingresar SOLAMENTE valores</p><br>
+            <form th:action="@{/registroDevengados/{id}/devengado(id=${empleado.cedula})}" th:object="${empleado}" method="POST">
+                <input type="hidden" name="empleadoId" th:value="${empleado.cedula}" />
+
+                <div class="form-group col-12 col-md-6 mx-auto">
+                    <label for="diasTrabajados">Días Trabajados:</label>
+                        <input type="text" name="devengados.diasTrabajados" class="form-control" th:field="*{devengados.diasTrabajados}" id="diasTrabajados" required autofocus="autofocus"><br>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="gastos">Gastos de Representación:</label>
+                        <input type="text" name="devengados.gastos" class="form-control" th:field="*{devengados.gastos}" id="gastos" required autofocus="autofocus"><br>
+                        <label for="sobresueldo">Sobresueldo:</label>
+                        <input type="text" name="devengados.sobresueldo" class="form-control" th:field="*{devengados.sobresueldo}" id="sobresueldo" required autofocus="autofocus">
+                    </div>
+                    <div class="col">
+                        <label for="viaticos">Viaticos:</label>
+                        <input type="text" name="devengados.viaticos" class="form-control" th:field="*{devengados.viaticos}" id="viaticos" required autofocus="autofocus"><br>
+                        <label for="comisiones">Comisiones:</label>
+                        <input type="text" name="devengados.comisiones" class="form-control" th:field="*{devengados.comisiones}" id="comisiones" required autofocus="autofocus"><br><hr>
+                    </div>
+                </div>
+                <h3>Horas Extras</h3>
+                <div class="row">
+                    <div class="col">
+                        <h4>Horas Extras Ordinarias</h4>
+                        <label for="HEDO">Horas Extras Diurnas Ordinarias:</label>
+                        <input type="text" name="devengados.HEDO" class="form-control" th:field="*{devengados.HEDO}" id="HEDO" required autofocus="autofocus"><br>
+                        <label for="HENO">Horas Extras Nocturnas Ordinarias:</label>
+                        <input type="text" name="devengados.HENO" class="form-control" th:field="*{devengados.HENO}" id="HENO" required autofocus="autofocus"><br>
+                    </div>
+                    <div class="col">
+                        <h4>Horas Extras Dominicales</h4>
+                        <label for="HEDDF">Horas Extras Diurnas Dominicales:</label>
+                        <input type="text" name="devengados.HEDDF" class="form-control" th:field="*{devengados.HEDDF}" id="HEDDF" required autofocus="autofocus"><br>
+                        <label for="HENDF">Horas Extras Nocturnas Dominicales:</label>
+                        <input type="text" name="devengados.HENDF" class="form-control" th:field="*{devengados.HENDF}" id="HENDF" required autofocus="autofocus"><br>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">REGISTRAR</button>
+            </form>
+        </div>
+    </body>
+</html>

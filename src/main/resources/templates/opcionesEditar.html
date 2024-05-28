@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Editar</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <style>
+        .button {
+        --bg: #000;
+        --hover-bg: #ff90e8;
+        --hover-text: #000;
+        color: #fff;
+        cursor: pointer;
+        border: 1px solid var(--bg);
+        border-radius: 4px;
+        padding: 0.8em 2em;
+        background: var(--bg);
+        transition: 0.2s;
+        }
+
+        .button:hover {
+        color: var(--hover-text);
+        transform: translate(-0.25rem, -0.25rem);
+        background: var(--hover-bg);
+        box-shadow: 0.25rem 0.25rem var(--bg);
+        }
+
+        .button:active {
+        transform: translate(0);
+        box-shadow: none;
+        }
+
+        .centrado {
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        }
+        </style>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Inicio</a>
+            </li>
+        </ul><br>
+        <div class="centrado">
+            <p>Selecciona qué deseas editar</p><br>
+            
+        </div>
+        
+        <div class="centrado"><a th:href="@{/EditarEmpleado/{id}/InformacionBasica(id=${empleado.cedula})}"><button class="button">Información básica del Empleado</button></a></div><br>
+        <div class="centrado"><a th:href="@{/EditarEmpleado/{id}/Devengados(id=${empleado.cedula})}"><button class="button">Agregar Devengados al Empleado</button></a></div><br>
+        <div class="centrado"><a th:href="@{/EditarEmpleado/{id}/Deducciones(id=${empleado.cedula})}"><button class="button">Agregar Deducciones al Empleado</button></a></div>
+    </body>
+</html>
