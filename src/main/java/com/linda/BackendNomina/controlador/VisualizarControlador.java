@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.linda.BackendNomina.modelo.Descuento;
+import com.linda.BackendNomina.modelo.Devengado;
 import com.linda.BackendNomina.modelo.Empleado;
 import com.linda.BackendNomina.repositorio.EmpleadoRepositorio;
 
@@ -16,10 +18,35 @@ public class VisualizarControlador {
     private EmpleadoRepositorio empleadoRepositorio;
 
     @GetMapping("/VisualizarEmpleado/{id}")
-    public String mostrarInformacionEmpleado(@PathVariable("id") int idEmpleados, Model modelo) {
-        Empleado empleado = empleadoRepositorio.findByCedula(idEmpleados);
-        modelo.addAttribute("empleado",empleado);
-        return "visualizarEmpleado";
+public String mostrarInformacionEmpleado(@PathVariable("id") int idEmpleados, Model modelo) {
+    Empleado empleado = empleadoRepositorio.findByCedula(idEmpleados);
+    
+    if (empleado != null) {
+        Devengado devengados = empleado.getDevengados();
+        Descuento descuentos = empleado.getDescuentos();
+        
+        // Cálculo del total de devengados
+        double totalDevengados = devengados.getSalarioDevengado() + devengados.getTransporte() + devengados.getGastos() +
+                                devengados.getPrimas() + devengados.getSobresueldo() + devengados.getViaticos() +
+                                devengados.getComisiones() + devengados.getGananciaOrdinarias() + devengados.getGananciaDominicales();
+        
+        // Cálculo del total de descuentos
+        double totalDescuentos = descuentos.getEps() + descuentos.getFondoSol() + descuentos.getFondoEmp() +
+                                descuentos.getPension() + descuentos.getBanco();
+        
+        // Cálculo del salario neto y salario bruto
+        double salarioNeto = totalDevengados - totalDescuentos;
+        double salarioBruto = devengados.getSalarioDevengado() + devengados.getTransporte() + devengados.getGastos() +
+                            devengados.getPrimas() + devengados.getSobresueldo() + devengados.getViaticos() +
+                            devengados.getComisiones()+devengados.getGananciaDominicales()+devengados.getGananciaOrdinarias();
+        
+        modelo.addAttribute("salarioNeto", salarioNeto);
+        modelo.addAttribute("salarioBruto", salarioBruto);
     }
+    
+    modelo.addAttribute("empleado", empleado);
+    return "visualizarEmpleado";
+}
+
     
 }

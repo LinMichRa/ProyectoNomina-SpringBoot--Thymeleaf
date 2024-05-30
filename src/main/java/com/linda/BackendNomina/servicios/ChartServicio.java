@@ -20,16 +20,17 @@ public class ChartServicio {
     @Autowired
     private EmpleadoRepositorio empleadoRepositorio;
 
-    public byte[] crearGraficaBarras() throws IOException{
+    public byte[] crearGraficaBarras() throws IOException {
         List<Empleado> empleados = empleadoRepositorio.findAll();
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (Empleado empleado : empleados) {
-            if (empleado.getDevengados() != null) {
+            if (empleado.getDevengados() != null && empleado.getDevengados().getSalarioDevengado() != 0) {
                 dataset.addValue(empleado.getDevengados().getSalarioDevengado(), "Salario Devengado", empleado.getNombre());
             }
         }
+
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Salarios Devengados por Empleado",
                 "Empleado",
@@ -37,8 +38,7 @@ public class ChartServicio {
                 dataset);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ChartUtils.writeChartAsPNG(outputStream, barChart, 400, 300);
+        ChartUtils.writeChartAsPNG(outputStream, barChart, 800, 600); // Tamaño de la gráfica
         return outputStream.toByteArray();
     }
-    
 }

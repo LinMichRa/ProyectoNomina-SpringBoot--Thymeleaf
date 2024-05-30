@@ -24,6 +24,9 @@ public class Nomina {
     @Column(name="salarioBruto")
     private int salarioBruto;
 
+    @Column(name="salarioNeto")
+    private int salarioNeto;
+
     @OneToOne
     private Empleado empleado;
 }
