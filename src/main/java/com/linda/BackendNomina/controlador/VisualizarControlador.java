@@ -9,13 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.linda.BackendNomina.modelo.Descuento;
 import com.linda.BackendNomina.modelo.Devengado;
 import com.linda.BackendNomina.modelo.Empleado;
+import com.linda.BackendNomina.modelo.Nomina;
 import com.linda.BackendNomina.repositorio.EmpleadoRepositorio;
+import com.linda.BackendNomina.repositorio.NominaRepositorio;
 
 
 @Controller
 public class VisualizarControlador {
     @Autowired
     private EmpleadoRepositorio empleadoRepositorio;
+
+    @Autowired
+    private NominaRepositorio nominaRepositorio;
 
     @GetMapping("/VisualizarEmpleado/{id}")
 public String mostrarInformacionEmpleado(@PathVariable("id") int idEmpleados, Model modelo) {
@@ -42,6 +47,13 @@ public String mostrarInformacionEmpleado(@PathVariable("id") int idEmpleados, Mo
         
         modelo.addAttribute("salarioNeto", salarioNeto);
         modelo.addAttribute("salarioBruto", salarioBruto);
+
+        Nomina nomina = new Nomina();
+        nomina.setSalarioBruto((int) salarioBruto);
+        nomina.setSalarioNeto((int) salarioNeto);
+        nomina.setEmpleado(empleado);
+
+        nominaRepositorio.save(nomina);
     }
     
     modelo.addAttribute("empleado", empleado);
