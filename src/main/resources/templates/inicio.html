@@ -68,7 +68,7 @@
                 <td>
                     <a th:href="@{/EditarEmpleado/{id}/menu(id=${empleado.cedula})}" class="btn btn-info" style="margin-left: auto;">Editar</a>
                     <a th:href="@{/VisualizarEmpleado/{id}(id=${empleado.cedula})}" class="btn btn-info" style="margin-left: auto;">Visualizar Empleado</a>
-                    <a th:href="@{/registroEmpleado}" class="btn btn-info" style="margin-left: auto;">Generar PDF Nomina</a>
+                    <a th:href="@{/GenerarPdfNomina/{id}(id=${empleado.cedula})}" class="btn btn-info" style="margin-left: auto;">Generar PDF Nomina</a>
                 </td>
                 </tr>
             </tbody>
