@@ -48,7 +48,7 @@ public class EmpleadoControlador {
     @Autowired
     private ServicioEmpleado empleadoServicio;
 
-    @GetMapping("/inicio")
+    @GetMapping({"/","/inicio"})
     public String listarTodosLosEmpleados(Model modelo){
         List<Empleado> empleados = operacionesEmpleado.listarEmpleados();
         modelo.addAttribute("empleado",empleados);
