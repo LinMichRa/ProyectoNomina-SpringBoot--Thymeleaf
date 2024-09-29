@@ -26,15 +26,15 @@ public class ChartServicio {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (Empleado empleado : empleados) {
-            if (empleado.getDevengados() != null && empleado.getDevengados().getSalarioDevengado() != 0) {
-                dataset.addValue(empleado.getDevengados().getSalarioDevengado(), "Salario Devengado", empleado.getNombre());
+            if (empleado.getDescuentos() != null && empleado.getDescuentos().getEps()!= 0)  {
+                dataset.addValue(empleado.getDescuentos().getEps(), "EPS", empleado.getNombre());
             }
         }
 
         JFreeChart barChart = ChartFactory.createBarChart(
-                "Salarios Devengados por Empleado",
+                "EPS por Empleado",
                 "Empleado",
-                "Salario Devengado",
+                "EPS",
                 dataset);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
